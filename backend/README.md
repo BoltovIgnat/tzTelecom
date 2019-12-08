@@ -1,21 +1,26 @@
-[![Build Status](https://travis-ci.com/givanthak/spring-boot-rest-api-tutorial.svg?branch=master)](https://travis-ci.com/givanthak/spring-boot-rest-api-tutorial)
-[![Known Vulnerabilities](https://snyk.io/test/github/givanthak/spring-boot-rest-api-tutorial/badge.svg)](https://snyk.io/test/github/givanthak/spring-boot-rest-api-tutorial)
+# Spring Boot, MySQL, JPA, Hibernate Rest API Tutorial
 
+Build Restful CRUD API for a simple Note-Taking application using Spring Boot, Mysql, JPA and Hibernate.
 
+## Requirements
 
-# Sample REST CRUD API with Spring Boot, Mysql, JPA and Hibernate 
+1. Java - 1.8.x
+
+2. Maven - 3.x.x
+
+3. Mysql - 5.x.x
 
 ## Steps to Setup
 
 **1. Clone the application**
 
 ```bash
-https://github.com/givanthak/spring-boot-rest-api-tutorial.git
+git clone https://github.com/callicoder/spring-boot-mysql-rest-api-tutorial.git
 ```
 
 **2. Create Mysql database**
 ```bash
-create database user_database
+create database notes_app
 ```
 
 **3. Change mysql username and password as per your installation**
@@ -28,8 +33,7 @@ create database user_database
 
 ```bash
 mvn package
-java -jar target/spring-boot-rest-api-tutorial-0.0.1-SNAPSHOT.jar
-
+java -jar target/easy-notes-1.0.0.jar
 ```
 
 Alternatively, you can run the app without packaging it using -
@@ -44,16 +48,20 @@ The app will start running at <http://localhost:8080>.
 
 The app defines following CRUD APIs.
 
-    GET /api/v1/users
+    GET /api/notes
     
-    POST /api/v1/users
+    POST /api/notes
     
-    GET /api/v1/users/{userId}
+    GET /api/notes/{noteId}
     
-    PUT /api/v1/users/{userId}
+    PUT /api/notes/{noteId}
     
-    DELETE /api/v1/users/{userId}
+    DELETE /api/notes/{noteId}
+
+You can test them using postman or any other rest client.
+
+## Learn more
 
 You can find the tutorial for this application on my blog -
 
-<https://www.prathapgivantha.wordpress.com>
+<https://www.callicoder.com/spring-boot-rest-api-tutorial-with-mysql-jpa-hibernate/>
