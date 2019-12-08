@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+    <!-- Include Bootstrap Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script src="/js/script.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Заказы</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </nav>
+
+    <div class="container">
+
+        <table id="myOrderTable" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Автомобиль</th>
+                <th>Номер автомобиля</th>
+                <th>ФИО арендатора</th>
+                <th>Магазин</th>
+                <th>Сумма</th>
+                <th>Дата взятия в прокат</th>
+                <th>Дата возврата</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!--Modal wiew-->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирование заказа</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="avto" class="col-form-label">Автомобиль:</label>
+                            <select class="ibc-select-avto custom-select" id="avto">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name_tanent" class="col-form-label">ФИО арендатора:</label>
+                            <select class="ibc-select-tanents custom-select" id="name_tanent">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pointofsale" class="col-form-label">Магазин:</label>
+                            <select class="ibc-select-pointofsale custom-select" id="pointofsale">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rental_Date_On" class="col-form-label">Дата взятия в прокат:</label>
+                            <div class='input-group date' id='rental_Date_On'>
+                                <input class="ibc_rental_Date_On" type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rental_Date_Off" class="col-form-label">Дата возврата:</label>
+                            <div class='input-group date' id='rental_Date_Off'>
+                                <input class="ibc_rental_Date_Off" type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ibc_amount">Сумма</label>
+                            <input type="text" class="form-control-file" id="ibc_amount">
+                        </div>
+                        <input type="hidden" class="ibc-hidden-id" value="">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="ibcbtn-update-order btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Создания заказа</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="create_avto" class="col-form-label">Автомобиль:</label>
+                            <select class="ibc-create-select-avto custom-select" id="create_avto">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="create_name_tanent" class="col-form-label">ФИО арендатора:</label>
+                            <select class="ibc-create-select-tanents custom-select" id="create_name_tanent">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="create_pointofsale" class="col-form-label">Магазин:</label>
+                            <select class="ibc-create-select-pointofsale custom-select" id="create_pointofsale">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rental_Date_On" class="col-form-label">Дата взятия в прокат:</label>
+                            <div class='input-group date' id='create_rental_Date_On'>
+                                <input class="ibc_create_rental_Date_On" type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rental_Date_Off" class="col-form-label">Дата возврата:</label>
+                            <div class='input-group date' id='create_rental_Date_Off'>
+                                <input class="ibc_create_rental_Date_Off" type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ibc_amount">Сумма</label>
+                            <input type="text" class="form-control-file" id="ibc_create_amount">
+                        </div>
+                        <input type="hidden" class="ibc-hidden-id" value="">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="ibcbtn-create-order btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg"  id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                Строка удалена
+            </div>
+        </div>
+    </div>
+</body>
+</html>
